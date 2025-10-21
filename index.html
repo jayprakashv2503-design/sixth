@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay Prakash's Proposal to Kanishka</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
+    body { overflow-x: hidden; background: #ffe6f0; color: #333; }
+    .page { display: none; height: 100vh; width: 100vw; justify-content: center; align-items: center; flex-direction: column; text-align: center; padding: 20px; opacity: 0; transition: opacity 0.8s ease; position: relative; }
+    .active { display: flex; opacity: 1; }
+    h1, h2 { margin-bottom: 20px; color: #e91e63; }
+    p { font-size: 1.2rem; margin-bottom: 20px; }
+    button { padding: 10px 20px; border: none; border-radius: 10px; background: #e91e63; color: #fff; font-size: 1rem; cursor: pointer; transition: 0.3s; }
+    button:hover { background: #ff4081; }
+
+    /* Page-specific styles */
+    #page1 { background: url('https://images.unsplash.com/photo-1511974035430-5de47d3b95da') center/cover no-repeat; color: #fff; }
+    #page2 { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+    #page3 { background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat; color: #fff; }
+    #page4 { background: linear-gradient(to right, #a1c4fd, #c2e9fb); }
+    #page5 { background: url('https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d') center/cover no-repeat; color: #fff; }
+    #page6 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
+    #page7 { background: url('https://images.unsplash.com/photo-1520813792240-56fc4a3765a7') center/cover no-repeat; color: #fff; }
+    #page8 { background: linear-gradient(to bottom, #ffecd2 0%, #fcb69f 100%); }
+    #page9 { background: url('https://images.unsplash.com/photo-1517457373958-bb7c89ed1b5b') center/cover no-repeat; color: #fff; }
+    #page10 { background: linear-gradient(45deg, #ff9a9e, #fecfef); }
+
+    /* Heart animation */
+    .heart { font-size: 3rem; color: #ff4081; animation: heartbeat 1s infinite; margin-bottom: 20px; cursor: pointer; }
+    @keyframes heartbeat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.3); } }
+
+    /* Floating hearts effect */
+    .floating-heart {
+        position: absolute;
+        color: #ff4081;
+        font-size: 20px;
+        animation: float 6s linear infinite;
+    }
+    @keyframes float {
+        0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(-50vh) translateX(50px) rotate(360deg); opacity: 0; }
+    }
+
+    /* Confetti effect */
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: #ff4081;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        opacity: 0.7;
+        animation: confetti-fall 3s linear forwards;
+    }
+    @keyframes confetti-fall {
+        to { transform: translate(var(--x), 100vh) rotate(720deg); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<audio id="bgMusic" src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" autoplay loop></audio>
+
+<!-- Pages -->
+<div id="page1" class="page active">
+    <h1>Hi Kanishka!</h1>
+    <p>This is Jay Prakash speaking... I have something very special for you ❤️</p>
+    <button onclick="nextPage()">Start</button>
+</div>
+
+<div id="page2" class="page">
+    <h2>Our Journey Begins</h2>
+    <p>Remember all the fun moments we shared? Let's take a little journey through them.</p>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<div id="page3" class="page">
+    <h2>Sweet Memories</h2>
+    <p>Every smile, every laugh... Every moment with you is unforgettable.</p>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<div id="page4" class="page">
+    <h2>A Little Quiz for You</h2>
+    <p>Guess which flower I would gift you right now? 🌸</p>
+    <button onclick="nextPage()">Roses 🌹</button>
+    <button onclick="nextPage()">Tulips 🌷</button>
+</div>
+
+<div id="page5" class="page">
+    <h2>Fun Game!</h2>
+    <p>Click the heart as fast as you can to catch my love ❤️</p>
+    <div class="heart" onclick="catchHeart()">💖</div>
+    <p id="score">Score: 0</p>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<div id="page6" class="page">
+    <h2>Feeling Lucky?</h2>
+    <p>Click below to reveal a surprise message.</p>
+    <button onclick="revealMessage()">Reveal ❤️</button>
+    <p id="surprise" style="margin-top:20px; font-size:1.2rem;"></p>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<div id="page7" class="page">
+    <h2>Special Poem for You</h2>
+    <p>"Roses are red, violets are blue, every moment, Kanishka, I think of you."</p>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<div id="page8" class="page">
+    <h2>Romantic Puzzle</h2>
+    <p>Complete the sentence: "Jay Prakash loves ______"</p>
+    <button onclick="alert('Correct! ❤️')">Kanishka</button>
+    <button onclick="alert('Try Again! 💔')">Someone else</button>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<div id="page9" class="page">
+    <h2>Almost There...</h2>
+    <p>Everything is ready for the big question. Take a deep breath ❤️</p>
+    <button onclick="nextPage()">Next</button>
+</div>
+
+<div id="page10" class="page">
+    <h1>Will You Be Mine, Kanishka? 💍</h1>
+    <p>Jay Prakash is asking you with all his heart...</p>
+    <button onclick="proposalResponse(true)">Say YES</button>
+    <button onclick="proposalResponse(false)">Say NO</button>
+</div>
+
+<script>
+    let currentPage = 1;
+    let heartScore = 0;
+
+    function nextPage() {
+        document.getElementById(`page${currentPage}`).classList.remove('active');
+        currentPage++;
+        if(currentPage > 10) currentPage = 10;
+        document.getElementById(`page${currentPage}`).classList.add('active');
+    }
+
+    function catchHeart() {
+        heartScore++;
+        document.getElementById('score').innerText = 'Score: ' + heartScore;
+    }
+
+    function revealMessage() {
+        document.getElementById('surprise').innerText = 'You are my everything, Kanishka ❤️';
+    }
+
+    // Proposal response
+    function proposalResponse(isYes) {
+        if(isYes) {
+            alert('She said YES! 🎉💖');
+            launchConfetti();
+        } else {
+            alert('It\'s okay, maybe next time! 💔');
+        }
+    }
+
+    // Confetti effect
+    function launchConfetti() {
+        for(let i=0; i<100; i++){
+            let confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.setProperty('--x', (Math.random()*100 - 50) + 'vw');
+            confetti.style.left = Math.random()*100 + 'vw';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    }
+
+    // Floating hearts
+    function createFloatingHearts() {
+        setInterval(() => {
+            let heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.fontSize = (Math.random() * 30 + 10) + 'px';
+            heart.innerText = '💖';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }, 500);
+    }
+    createFloatingHearts();
+</script>
+
+</body>
+</html>
